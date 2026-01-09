@@ -32,10 +32,10 @@ if (typeof window !== 'undefined') {
 }
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: import.meta.env.VITE_API_URL,
   timeout: 10000,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -43,9 +43,7 @@ const API = axios.create({
 API.interceptors.request.use((req) => {
   const url = req.url || '';
   
-  
-  // req.headers['X-Request-ID'] = Date.now() + Math.random().toString(36).substr(2, 9);
-  
+
   console.log(`📤 [${req.method}] ${url}`);
   
   // Routes that don't need authorization
