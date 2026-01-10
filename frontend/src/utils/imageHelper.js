@@ -3,7 +3,8 @@ export const getImageUrl = (imagePath) => {
     return "https://via.placeholder.com/300x200?text=No+Image";
   }
   
-  const baseUrl = import.meta.env.VITE_SOCKET_URL;
+  const baseUrl = import.meta.env.VITE_API_URL;
+L;
   
   // If already a full URL
   if (imagePath.startsWith('http')) {
