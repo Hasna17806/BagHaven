@@ -74,8 +74,8 @@ const EditProduct = () => {
         
         const previews = product.images.map(img => {
           if (img.startsWith('http')) return img;
-          if (img.startsWith('/uploads/')) return `http://localhost:5000${img}`;
-          return `http://localhost:5000/uploads/${img}`;
+          if (img.startsWith('/uploads/')) return `${import.meta.env.VITE_SOCKET_URL}${img}`;
+          return `${import.meta.env.VITE_SOCKET_URL}/uploads/${img}`;
         });
         
         setImagePreviews(previews);

@@ -44,14 +44,14 @@ const Cart = () => {
     }
     
     if (imagePath.startsWith('/uploads/')) {
-      return `http://localhost:5000${imagePath}`;
+      return `${import.meta.env.VITE_SOCKET_URL}${imagePath}`;
     }
     
     if (imagePath.startsWith('uploads/')) {
-      return `http://localhost:5000/${imagePath}`;
+      return `${import.meta.env.VITE_SOCKET_URL}/${imagePath}`;
     }
     
-    return `http://localhost:5000/uploads/${imagePath}`;
+    return `${import.meta.env.VITE_SOCKET_URL}/uploads/${imagePath}`;
   };
 
   // Handle image error

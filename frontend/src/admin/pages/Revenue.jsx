@@ -25,7 +25,7 @@ const Revenue = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const API_BASE_URL = 'http://localhost:5000';
+  const API_BASE_URL = import.meta.env.VITE_SOCKET_URL;
 
   useEffect(() => {
     fetchRevenue();

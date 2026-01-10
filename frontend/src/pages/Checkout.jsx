@@ -654,11 +654,11 @@ const Checkout = () => {
     }
     
     if (imagePath.startsWith('/uploads/')) {
-      return `http://localhost:5000${imagePath}`;
+      return `${import.meta.env.VITE_SOCKET_URL}${imagePath}`;
     }
     
     if (imagePath.includes('.jpg') || imagePath.includes('.jpeg') || imagePath.includes('.png') || imagePath.includes('.avif')) {
-      return `http://localhost:5000/uploads/${imagePath}`;
+      return `${import.meta.env.VITE_SOCKET_URL}/uploads/${imagePath}`;
     }
     
     return imagePath;

@@ -84,7 +84,7 @@ useEffect(() => {
           console.log("   - Starts with http?", imagePath.startsWith('http'));
           
           // How frontend constructs the URL
-          const frontendUrl = `http://localhost:5000${imagePath}`;
+          const frontendUrl = `${import.meta.env.VITE_SOCKET_URL}${imagePath}`;
           console.log("   - Frontend will try:", frontendUrl);
           
           // Test if image loads
@@ -403,9 +403,9 @@ useEffect(() => {
         if (imgPath.startsWith('http')) {
           return imgPath;
         } else if (imgPath.startsWith('/')) {
-          return `http://localhost:5000${imgPath}`;
+          return `${import.meta.env.VITE_SOCKET_URL}${imgPath}`;
         } else {
-          return `http://localhost:5000/${imgPath}`;
+          return `${import.meta.env.VITE_SOCKET_URL}/${imgPath}`;
         }
       })()
     : "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=800&h=800&fit=crop"

@@ -297,7 +297,7 @@ const ProductDetails = () => {
               <div className="relative bg-white rounded-3xl aspect-square overflow-hidden mb-6 shadow-xl border border-gray-100 group">
                 {images.length > 0 ? (
                   <img
-                    src={`http://localhost:5000${images[selectedImage]}`}
+                    src={`${import.meta.env.VITE_SOCKET_URL}${images[selectedImage]}`}
                     alt={product.name}
                     className="w-full h-full object-cover p-10 group-hover:scale-110 transition-transform duration-700 ease-out"
                     onError={(e) => {
@@ -344,7 +344,7 @@ const ProductDetails = () => {
                       }`}
                     >
                       <img
-                        src={`http://localhost:5000${img}`}
+                        src={`${import.meta.env.VITE_SOCKET_URL}${img}`}
                         alt={`${product.name} ${idx + 1}`}
                         className="w-full h-full object-cover p-2"
                         onError={(e) => {

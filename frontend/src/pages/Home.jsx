@@ -223,7 +223,7 @@ const Home = () => {
                 <Link to={`/product/${p._id}`}>
                   <div className="aspect-[3/4] bg-gradient-to-br from-gray-100 to-gray-50 overflow-hidden relative">
                     <img
-                      src={`http://localhost:5000${p.images[0]}`}
+                      src={`${import.meta.env.VITE_SOCKET_URL}${p.images[0]}`}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute top-3 right-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -419,7 +419,6 @@ const Home = () => {
         </div>
       </section>
 
-{/* ------------------------------------------------------------ */}
 
       {/* PROMO BANNER */}
       <section className="py-24 bg-gradient-to-r from-amber-50 via-orange-50 to-amber-50 relative overflow-hidden">

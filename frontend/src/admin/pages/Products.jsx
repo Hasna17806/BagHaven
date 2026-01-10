@@ -44,7 +44,7 @@ const Products = () => {
       return "https://via.placeholder.com/400?text=No+Image";
     }
     
-    const baseUrl = "http://localhost:5000";
+    const baseUrl = import.meta.env.VITE_SOCKET_URL;
     
     if (imagePath.startsWith('http')) {
       return imagePath;

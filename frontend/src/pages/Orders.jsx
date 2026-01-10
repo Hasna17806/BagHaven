@@ -22,7 +22,7 @@ const Orders = () => {
   const [returnComments, setReturnComments] = useState("");
   const [submittingReturn, setSubmittingReturn] = useState(false);
 
-  const API_BASE_URL = 'http://localhost:5000';
+  const API_BASE_URL = import.meta.env.VITE_SOCKET_URL;
 
   // Get orders from both API and localStorage
   const fetchAllOrders = useCallback(async () => {
