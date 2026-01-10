@@ -1,5 +1,6 @@
 import Product from '../../models/Product.js';
 import mongoose from 'mongoose';
+import cloudinary from '../../config/cloudinary.js';
 
 /**
  * Get all products (admin)
@@ -8,7 +9,6 @@ export const getAdminProducts = async (req, res) => {
   try {
     const products = await Product.find({}).sort({ createdAt: -1 }).lean();
     
-    // ✅ Consistent image formatting
     const formattedProducts = products.map(product => {
       const formattedProduct = { ...product };
       
@@ -44,13 +44,14 @@ export const getAdminProducts = async (req, res) => {
 };
 
 /**
- * Create new product - BUG FIXED
+ * Create new product
  */
+
 export const createProduct = async (req, res) => {
   try {
     console.log('📦 Creating product...');
     console.log('📋 Request body:', req.body);
-    console.log('🖼️  Files received:', req.files ? req.files.length : 0);
+    console.log('🖼️ Files received:', req.files ? req.files.length : 0);
 
     // Validate required fields
     const { name, price, category } = req.body;
@@ -65,8 +66,23 @@ export const createProduct = async (req, res) => {
     // Handle image uploads
     let images = [];
     if (req.files && req.files.length > 0) {
-      // ✅ FIXED: Changed 'image' to 'images'
-      images = req.files.map(file => file.filename);
+  let images = [];
+
+if (req.files && req.files.length > 0) {
+  for (const file of req.files) {
+    const result = await cloudinary.uploader.upload(
+      `data:${file.mimetype};base64,${file.buffer.toString("base64")}`,
+      { folder: "products" }
+    );
+
+    images.push(result.secure_url);
+  }
+} else {
+  return res.status(400).json({
+    success: false,
+    message: "At least one image is required"
+  });
+}
       console.log('📸 Images saved:', images);
     } else {
       return res.status(400).json({
@@ -186,9 +202,9 @@ export const getProductById = async (req, res) => {
   }
 };
 
-/**
- * Update product
- */
+
+  //Update product
+ 
 export const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
@@ -226,12 +242,16 @@ export const updateProduct = async (req, res) => {
       }
     }
     
-    // Add new uploaded images
-    if (req.files && req.files.length > 0) {
-      const newImages = req.files.map(file => file.filename);
-      images = [...images, ...newImages]; // Append new images
-      console.log('➕ Adding new images:', newImages);
-    }
+if (req.files && req.files.length > 0) {
+  for (const file of req.files) {
+    const uploadResult = await cloudinary.uploader.upload(
+      `data:${file.mimetype};base64,${file.buffer.toString("base64")}`,
+      { folder: "products" }
+    );
+    images.push(uploadResult.secure_url);
+  }
+}
+
 
     console.log('📸 Final images array:', images);
 
